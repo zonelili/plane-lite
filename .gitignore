@@ -1,0 +1,59 @@
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# 临时文件
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# 构建产物
+target/
+build/
+dist/
+out/
+*.class
+*.jar
+*.war
+
+# 依赖目录
+node_modules/
+.pnp/
+.pnp.js
+
+# 测试覆盖率
+coverage/
+*.lcov
+.nyc_output/
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 数据库
+*.db
+*.sqlite
+*.sqlite3
+
+# 日志
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+docker-compose.override.yml
+
+# 其他
+.cache/
