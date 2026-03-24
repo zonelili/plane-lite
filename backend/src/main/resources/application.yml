@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: plane-lite
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+# Swagger/OpenAPI 配置
+springdoc:
+  api-docs:
+    path: /api/v1/docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  info:
+    title: Plane Lite API
+    description: 轻量级项目管理系统 API 文档
+    version: 1.0.0
