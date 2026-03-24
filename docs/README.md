@@ -8,23 +8,90 @@
 
 ```
 docs/
-├── requirements/          # 需求文档
+├── requirements/          # 📋 需求文档（持久）
 │   └── 01-project-overview.md
-├── architecture/          # 架构设计
+├── architecture/          # 🏗️ 架构设计（持久）
 │   ├── database-design.md
-│   ├── system-architecture.md (待创建)
-│   └── frontend-architecture.md (待创建)
-├── conventions/           # 编码规范
+│   ├── system-architecture.md
+│   ├── backend-implementation.md
+│   ├── frontend-implementation.md
+│   └── deployment.md
+├── conventions/           # 📖 编码规范（持久）
 │   ├── api.md
 │   ├── coding-standards.md (待创建)
 │   ├── database.md (待创建)
 │   └── frontend.md (待创建)
-├── workflows/             # 工作流程
+├── workflows/             # 🔄 工作流程（持久）
+│   ├── quality-assurance.md
 │   ├── development-workflow.md (待创建)
 │   └── git-workflow.md (待创建)
-└── decisions/             # 架构决策记录 (ADR)
-    └── (待添加)
+├── decisions/             # 🎯 架构决策记录 ADR（持久）
+│   └── ADR-001-quality-assurance-workflow.md
+├── reports/               # 📊 报告和分析（临时）
+│   ├── code-review-day1-2.md
+│   └── java-version-fix.md
+├── development-plan.md    # 📅 开发计划（临时，项目完成后归档）
+├── lessons-learned.md     # 💡 经验总结（持久累积）
+└── project-kickoff.md     # 🚀 项目启动记录
 ```
+
+## 📚 文档分类规范
+
+### 持久文档（Persistent Documents）
+
+**定义**：项目长期维护的文档，需要持续更新
+
+| 目录 | 用途 | 示例 | 更新频率 |
+|------|------|------|----------|
+| `requirements/` | 需求文档和版本规划 | 项目概述、功能需求 | 版本迭代时 |
+| `architecture/` | 系统架构和技术选型 | 数据库设计、系统架构图 | 架构变更时 |
+| `conventions/` | 编码规范和最佳实践 | API 规范、代码风格 | 规范调整时 |
+| `workflows/` | 常见开发任务流程 | 质量保障流程、Git 工作流 | 流程优化时 |
+| `decisions/` | 架构决策记录（ADR） | ADR-001 质量保障决策 | 重大决策时 |
+| `lessons-learned.md` | 项目经验总结 | Harness 实践、技术决策 | 持续累积 |
+
+**命名规范**：
+- 使用小写字母和连字符：`database-design.md`
+- 有序文档加编号前缀：`01-project-overview.md`
+- ADR 使用标准格式：`ADR-NNN-title.md`
+
+### 临时文档（Temporary Documents）
+
+**定义**：项目特定阶段的文档，项目完成后归档或删除
+
+| 目录/文件 | 用途 | 示例 | 生命周期 |
+|----------|------|------|----------|
+| `reports/` | 审查报告、分析报告 | 代码审查报告、问题修复报告 | 完成后归档 |
+| `development-plan.md` | 开发计划和任务分解 | Day 1-7 开发任务 | 项目完成后归档 |
+| `project-kickoff.md` | 项目启动记录 | 初始化过程记录 | 归档保留 |
+
+**归档规则**：
+- 项目完成后移动到 `archive/` 目录
+- 保留有价值的内容到 `lessons-learned.md`
+- 删除过时的临时报告
+
+### 文档创建规则
+
+**在创建新文档前，必须问自己：**
+
+1. **这是持久文档还是临时文档？**
+   - 持久 → 放在对应的分类目录下
+   - 临时 → 放在 `reports/` 或作为临时文件
+
+2. **这个内容是否可以合并到现有文档？**
+   - 问题修复记录 → 合并到 `lessons-learned.md`
+   - 技术决策 → 创建 ADR 或更新 architecture/
+   - 工作流程 → 创建或更新 workflows/
+
+3. **文档命名是否符合规范？**
+   - ✅ `code-review-day1-2.md`
+   - ❌ `CODE_REVIEW_DAY1-2.md`（不要全大写）
+
+4. **CLAUDE.md 是否需要更新索引？**
+   - 如果添加了新的**持久文档目录**，必须更新 CLAUDE.md
+   - 临时文档不需要更新 CLAUDE.md
+
+---
 
 ---
 
@@ -54,6 +121,46 @@ docs/
   - 认证和授权
   - 错误处理
 
+### 工作流程
+- **[质量保障流程](./workflows/quality-assurance.md)**
+  - 三层质量保障机制（Plan Mode、Implementation、Code Review）
+  - 技术栈兼容性验证
+  - 实体类与数据库一致性检查
+  - 配置文件完整性验证
+  - 编译和启动验证
+
+### 架构决策记录（ADR）
+- **[ADR-001: 质量保障工作流](./decisions/ADR-001-quality-assurance-workflow.md)**
+  - 背景：Day 2 开发中暴露的质量问题
+  - 决策：建立三层质量保障机制
+  - 理由：减少返工、提高代码质量、知识积累
+  - 影响：开发流程优化、文档持久化
+
+### 报告和分析
+- **[代码审查报告 - Day 1-2](./reports/code-review-day1-2.md)**
+  - 全面审查 Day 1-2 的代码质量
+  - 发现 1 个 CRITICAL 问题（Java 版本不匹配）
+  - 发现 2 个安全问题（JWT、密码存储）
+  - 验证代码与 Plan 一致性
+
+- **[Java 版本问题修复报告](./reports/java-version-fix.md)**
+  - 修复 Maven Java 版本不匹配问题
+  - 验证编译和启动成功
+  - 提供预防措施和改进建议
+
+### 开发指南
+- **[开发计划](./development-plan.md)**
+  - Day 1-7 开发任务分解
+  - 每日目标和验收标准
+  - 技术栈和依赖关系
+
+- **[经验总结](./lessons-learned.md)**
+  - Harness 实践经验
+  - 质量保障机制的教训（Day 2）
+  - 人机协作经验
+  - 技术决策经验
+  - 文档编写经验
+
 ---
 
 ## 🚀 快速导航
@@ -73,7 +180,23 @@ docs/
 → [编码规范](./conventions/coding-standards.md) (待创建)
 
 **开发流程**
+→ [质量保障流程](./workflows/quality-assurance.md)
 → [开发工作流](./workflows/development-workflow.md) (待创建)
+
+**开发计划**
+→ [Day 1-7 开发计划](./development-plan.md)
+
+**经验总结**
+→ [AI Coding 实践经验](./lessons-learned.md)
+
+**代码审查**
+→ [代码审查报告 - Day 1-2](./reports/code-review-day1-2.md)
+
+**问题修复**
+→ [Java 版本问题修复](./reports/java-version-fix.md)
+
+**架构决策**
+→ [ADR-001: 质量保障工作流](./decisions/ADR-001-quality-assurance-workflow.md)
 
 ---
 
@@ -84,8 +207,16 @@ docs/
 | 项目概述与版本规划 | ✅ 已完成 | 2026-03-23 |
 | 数据库设计 | ✅ 已完成 | 2026-03-23 |
 | API 设计规范 | ✅ 已完成 | 2026-03-23 |
-| 系统架构设计 | ⏳ 待创建 | - |
-| 前端架构设计 | ⏳ 待创建 | - |
+| 质量保障流程 | ✅ 已完成 | 2026-03-24 |
+| ADR-001 质量保障工作流 | ✅ 已完成 | 2026-03-24 |
+| 开发计划 | ✅ 已完成 | 2026-03-24 |
+| 经验总结 | ✅ 持续更新 | 2026-03-24 |
+| 代码审查报告 Day 1-2 | ✅ 已完成 | 2026-03-24 |
+| Java 版本修复报告 | ✅ 已完成 | 2026-03-24 |
+| 系统架构设计 | ✅ 已完成 | 2026-03-23 |
+| 后端实现文档 | ✅ 已完成 | 2026-03-23 |
+| 前端实现文档 | ✅ 已完成 | 2026-03-23 |
+| 部署文档 | ✅ 已完成 | 2026-03-23 |
 | 编码规范 | ⏳ 待创建 | - |
 | 数据库规范 | ⏳ 待创建 | - |
 | 前端规范 | ⏳ 待创建 | - |
@@ -169,4 +300,4 @@ docs/
 
 ---
 
-**最后更新**：2026-03-23
+**最后更新**：2026-03-24

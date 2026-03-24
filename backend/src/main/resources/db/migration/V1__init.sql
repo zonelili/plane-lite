@@ -47,13 +47,16 @@ CREATE TABLE IF NOT EXISTS `project` (
   `description` TEXT DEFAULT NULL COMMENT '项目描述',
   `icon` VARCHAR(50) DEFAULT NULL COMMENT '项目图标（emoji）',
   `cover_image` VARCHAR(255) DEFAULT NULL COMMENT '封面图片 URL',
+  `lead_id` BIGINT DEFAULT NULL COMMENT '项目负责人用户ID',
   `created_by` BIGINT NOT NULL COMMENT '创建者用户ID',
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   FOREIGN KEY (`workspace_id`) REFERENCES `workspace`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`lead_id`) REFERENCES `user`(`id`) ON DELETE SET NULL,
   FOREIGN KEY (`created_by`) REFERENCES `user`(`id`) ON DELETE RESTRICT,
   UNIQUE KEY `uk_workspace_identifier` (`workspace_id`, `identifier`),
   INDEX `idx_workspace_id` (`workspace_id`),
+  INDEX `idx_lead_id` (`lead_id`),
   INDEX `idx_created_by` (`created_by`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='项目表';
 

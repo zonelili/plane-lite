@@ -10,6 +10,7 @@ import com.planelite.module.user.dto.UserVO;
 import com.planelite.module.user.entity.User;
 import com.planelite.module.user.mapper.UserMapper;
 import com.planelite.module.user.service.UserService;
+import com.planelite.module.workspace.service.WorkspaceService;
 import com.planelite.security.JwtTokenProvider;
 import com.planelite.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     private final JwtTokenProvider jwtTokenProvider;
+    private final WorkspaceService workspaceService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -59,6 +61,9 @@ public class UserServiceImpl implements UserService {
         user.setIsActive(true);
 
         userMapper.insert(user);
+
+        // 创建默认工作区
+        workspaceService.createDefaultWorkspace(user.getId(), user.getUsername());
 
         log.info("用户注册成功 - userId: {}", user.getId());
         return convertToVO(user);
