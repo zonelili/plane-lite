@@ -1094,5 +1094,16 @@ Layer 4: Code Review
      - **失败必须立即停止**：检查不通过时，不允许继续，强制回到正确流程
      - **Skill 是流程守护者**：通过强制检查点确保流程不被跳过
 
+10. **Code Review 只审查变动部分，节省 token（Day 4，2026-03-24）**
+   - **问题**：Code Review Agent 每次读取所有文件，消耗大量 token
+   - **优化方案**：只审查变动部分（`git diff HEAD` 或 `git diff BASE_SHA HEAD_SHA`）
+   - **效果**：
+     - 新增模块：差别不大（所有文件都是新的）
+     - 修改已有代码：token 消耗大幅降低（只读取修改的行）
+   - **实施**：
+     - 更新 `implement-day` skill 阶段3（Code Review）
+     - 使用 `git diff` 命令获取变动，传递给 code-reviewer agent
+   - **教训**：工作流程要持续优化，不是"记在心里"，而是**写入流程文档**
+
 ---
 
