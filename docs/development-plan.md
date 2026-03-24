@@ -162,9 +162,9 @@
   - 删除评论（仅评论作者可删除）
 
 **API 接口**：
-- GET /api/v1/issues/{id}/comments - 获取问题评论列表
-- POST /api/v1/issues/{id}/comments - 添加评论
-- DELETE /api/v1/issues/{id}/comments/{commentId} - 删除评论
+- GET /api/v1/comments?issueId={id} - 获取问题评论列表（按时间倒序）
+- POST /api/v1/comments - 添加评论
+- DELETE /api/v1/comments/{id} - 删除评论
 
 **2. 后端完善和测试（预计 2-3 小时）**
 - [ ] 用 Swagger 测试所有 API
