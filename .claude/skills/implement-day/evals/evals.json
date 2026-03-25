@@ -1,0 +1,23 @@
+{
+  "skill_name": "implement-day",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "实现 Day 3\n\n项目背景: Plane Lite 项目管理平台,技术栈 Spring Boot + MyBatis-Plus + MySQL。项目路径在 /Users/zhangyuhe/Documents/myproject/plane-lite,开发计划在 docs/development-plan.md。Day 3 的任务是实现问题管理模块(Issue Management),包含 Issue 实体、IssueService、IssueController,以及 6 个 API 接口(创建、查询、更新、删除、列表、看板)。需要自动生成工单编号(格式 PROJECT-N),支持状态流转和权限控制。",
+      "expected_output": "完整执行 6 个阶段: (0) 准备验证 → (1) Plan Mode 生成方案 → (2) Implementation 创建代码 → (3) Code Review 审查 → (4) Testing 测试 → (5) Commit 提交 → (6) Reporting 生成报告。最终应该生成所有必需文档(.claude/plans/day-3-plan.md, docs/reports/day-3-*.md),创建 Git commit,输出友好的完成总结。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "继续 Day 3\n\n我之前在实现 Day 3 时在测试阶段遇到了错误(API 测试失败,删除接口返回 403),现在我已经手动修复了权限注解问题。项目在 /Users/zhangyuhe/Documents/myproject/plane-lite,状态文件应该在 .claude/state/day-3-state.json,显示 current_stage 是 testing。帮我从测试阶段继续执行,跳过已完成的准备、Plan Mode 和编码阶段。",
+      "expected_output": "检测到状态文件,从 Stage 3 (Testing) 继续执行。跳过已完成的 Stage 0-2,提示用户已完成的阶段,然后重新运行测试 → Code Review → Commit → Reporting。如果测试现在通过,应该顺利完成后续阶段。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "开始 Day 5 的开发任务\n\n我在做一个 Node.js + Express 的 API 项目,路径是 /Users/zhangyuhe/my-express-app,开发计划文件在 docs/requirements/development-plan.md。Day 5 的任务是实现用户认证模块,包括 JWT token 生成、登录/注册接口、密码加密(bcrypt),以及 middleware 权限验证。技术栈: Node.js 18, Express 4, MongoDB, Jest 测试。需要创建 User model, AuthController, AuthService, JWT middleware,以及单元测试和 API 集成测试。",
+      "expected_output": "自动检测 Node.js/Express 技术栈,调整命令映射(npm test, npm start 等)。执行完整的 6 阶段流程: Plan Agent 生成方案 → 创建 JS/TS 代码文件 → Code Review → 运行 Jest 测试和 API 测试 → Git commit → 生成报告。技术栈检测应该正确识别 package.json 并使用 npm 命令而不是 mvn。",
+      "files": []
+    }
+  ]
+}
