@@ -1,0 +1,82 @@
+Current active Day: None
+Last completed: Day 5 - 前端 UI 设计和实现
+Current phase: idle
+Last updated: 2026-03-26
+
+=== Quick Checklist for Next Session ===
+
+☐ 是否有新的 Day 6 任务要开始？
+☐ 检查 docs/development-plan.md 中 Day 6 的任务描述
+☐ 如果涉及前端，先在 tech-design 阶段确认设计语言
+☐ 查看新增的前端设计确认流程：docs/experiences/2026-03-25-frontend-visual-design-confirmation.md
+
+=== Key Decisions ===
+
+✅ 前端视觉设计必须在 tech-design 阶段一次确定（2026-03-25）
+✅ 登录/注册页面采用"编辑风工业极简"风格
+   - 字体：DM Serif Display（标题）+ JetBrains Mono（正文）
+   - 色调：亮色系
+   - 主色：深墨棕 #1C1410（品牌面板）
+   - 高亮色：琥珀金 #D4870A
+   - 背景色：暖奶油白 #FAF7F2
+
+✅ 真实命令绑定已建立（2026-03-26）
+   - Backend: make backend-verify (mvn clean compile + mvn test + checkstyle)
+   - Frontend: make frontend-verify (lint + test + build)
+   - Unified: make verify
+
+✅ 经验独立文件化已完成（2026-03-26）
+   - 新增 docs/experiences/ 目录
+   - Day 5 前端迭代经验已沉淀到独立文件
+
+=== Environment Status ===
+
+✓ Backend: Spring Boot 3.1.5 + MyBatis-Plus，已配置 Maven 校验和测试命令
+✓ Frontend: Vue 3.3.11 + Vite 5.0.8，已完成登录/注册页面
+✓ Database: MySQL 初始化脚本已准备（backend/src/main/resources/db/migration/V1__init.sql）
+
+=== Known Blockers ===
+
+None
+
+=== Pending Tasks ===
+
+- Day 6: 项目和问题管理页面实现
+  - 预计涉及前端页面（ProjectList / IssueList / IssueDetail）
+  - 需要在 tech-design 阶段确认 Day 6 页面的设计语言（复用 Day 5 的还是新设计）
+
+=== Recent Improvements ===
+
+1. 补齐真实命令绑定
+   - 创建 Makefile 统一管理 lint / test / build / verify 命令
+   - backend/pom.xml 新增 Maven Checkstyle 和 Surefire 插件
+   - implement-day Testing 阶段改进为记录实际执行的命令和返回码
+
+2. 经验沉淀独立化
+   - 创建 docs/experiences/ 目录和索引
+   - Day 5 前端迭代经验单独成文，便于后续复用
+   - 经验文件包含问题场景、根本原因、解决方案、验证方式
+
+3. 知识复用改进
+   - 新的经验文件格式便于 agent 快速搜索和复用
+   - 避免了经验知识在 lessons-learned.md 中混杂丢失的问题
+
+=== Next Steps ===
+
+优先级排序：
+
+1. 运行 `make verify` 验证新命令绑定是否生效
+2. 开始 Day 6 任务时，参考新的前端设计确认流程
+3. 在 tech-design 阶段确认 Day 6 前端页面的设计规范
+4. 考虑将更多经验知识沉淀到独立文件（从 lessons-learned.md 逐步迁移）
+5. 可选：创建 docs/experiences/2026-03-25-command-binding-and-evidence-chain.md 记录真实命令绑定的改进
+
+=== Context Notes ===
+
+本次改造基于对 Harness Lab 框架的学习：
+- 从 Plane Lite 的质量保障机制出发
+- 采纳 Harness 的"真实命令绑定"和"证据链管理"原则
+- 保留 implement-day 的自动化工作流（不完全迁移到 Harness）
+- 改进经验沉淀机制（独立文件而不是线性日记）
+
+详见 docs/experiences/ 中的经验文档。

@@ -432,7 +432,16 @@ description: >
    - Python: `pytest`
    - Go: `go test ./...`
 
-   验收标准: 所有测试通过
+   **记录执行的命令和结果**：
+   ```bash
+   # 示例：执行 Java 单元测试
+   Command executed: mvn clean test
+   Return code: 0
+   Summary: 10/10 tests passed, 0 failures
+   Duration: 45s
+   ```
+
+   验收标准: 所有测试通过 (return code = 0)
 
 2. **集成/API 测试**(如果项目有)
    - 查找测试脚本: `tests/day-N-api-test.sh` 或类似
@@ -490,9 +499,34 @@ description: >
 4. **生成测试报告**
    创建 `docs/reports/day-N-test-results.md`:
    - 测试概要(总数、通过率)
+   - **实际执行的命令**（必须包含）
+   - 命令返回码
    - 详细结果
    - 性能指标(如适用)
    - **测试脚本路径**（必须包含）
+
+   示例：
+   ```markdown
+   ## 单元测试结果
+
+   命令: mvn clean test
+   返回码: 0
+   总计: 10 tests
+   通过: 10
+   失败: 0
+   持续时间: 45s
+
+   ## 集成测试结果
+
+   命令: bash tests/day-5-api-test.sh
+   返回码: 0
+   摘要: 8/8 API 测试通过
+
+   ## 验证命令
+
+   完整验证: make verify
+   返回码: 0
+   ```
 
 5. **更新状态文件**
    ```json
