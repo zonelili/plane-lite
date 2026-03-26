@@ -11,8 +11,8 @@
 experiences/
 ├── README.md (本文件)
 ├── 2026-03-25-frontend-visual-design-confirmation.md
-├── 2026-03-24-quality-assurance-four-layers.md
-└── 2026-03-23-documentation-reorganization.md
+├── 2026-03-26-quality-assurance-four-layers.md
+└── 2026-03-26-documentation-reorganization.md
 ```
 
 ## 快速查找
@@ -21,8 +21,10 @@ experiences/
 - `2026-03-25-frontend-visual-design-confirmation.md` - 前端视觉设计语言确认流程问题和解决方案
 
 ### 质量保障
-- `2026-03-24-quality-assurance-four-layers.md` - 质量保障四层机制设计和实施
-- `2026-03-23-documentation-reorganization.md` - 文档分类规范改进
+- `2026-03-26-quality-assurance-four-layers.md` - 质量保障四层机制设计和实施
+
+### 工程化和文档
+- `2026-03-26-documentation-reorganization.md` - 文档分类规范和重组实践
 
 ## 如何使用
 
