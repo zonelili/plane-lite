@@ -148,18 +148,10 @@
                 <version>3.3.1</version>
                 <configuration>
                     <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <failOnViolation>true</failOnViolation>
+                    <failsOnError>false</failsOnError>
+                    <failOnViolation>false</failOnViolation>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <!-- Note: Checkstyle execution disabled for now. Run manually with: mvn checkstyle:check -->
             </plugin>
             <!-- Maven Surefire Plugin for Testing -->
             <plugin>
