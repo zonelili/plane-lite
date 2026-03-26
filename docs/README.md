@@ -26,7 +26,14 @@ docs/
 │   ├── development-workflow.md (待创建)
 │   └── git-workflow.md (待创建)
 ├── decisions/             # 🎯 架构决策记录 ADR（持久）
-│   └── ADR-001-quality-assurance-workflow.md
+│   ├── ADR-001-quality-assurance-workflow.md
+│   ├── ADR-002-command-binding-principle.md
+│   └── ADR-003-frontend-design-confirmation.md
+├── experiences/           # 📚 可复用的经验库（持久）
+│   ├── README.md
+│   ├── 2026-03-25-frontend-visual-design-confirmation.md
+│   ├── 2026-03-26-quality-assurance-four-layers.md
+│   └── 2026-03-26-documentation-reorganization.md
 ├── reports/               # 📊 报告和分析（临时）
 │   ├── code-review-day1-2.md
 │   └── java-version-fix.md
@@ -47,7 +54,8 @@ docs/
 | `architecture/` | 系统架构和技术选型 | 数据库设计、系统架构图 | 架构变更时 |
 | `conventions/` | 编码规范和最佳实践 | API 规范、代码风格 | 规范调整时 |
 | `workflows/` | 常见开发任务流程 | 质量保障流程、Git 工作流 | 流程优化时 |
-| `decisions/` | 架构决策记录（ADR） | ADR-001 质量保障决策 | 重大决策时 |
+| `decisions/` | 架构决策记录（ADR） | ADR-001/002/003 等决策 | 重大决策时 |
+| `experiences/` | 可复用的经验知识库 | 设计确认、质量保障经验 | 持续积累 |
 | `lessons-learned.md` | 项目经验总结 | Harness 实践、技术决策 | 持续累积 |
 
 **命名规范**：
@@ -132,9 +140,39 @@ docs/
 ### 架构决策记录（ADR）
 - **[ADR-001: 质量保障工作流](./decisions/ADR-001-quality-assurance-workflow.md)**
   - 背景：Day 2 开发中暴露的质量问题
-  - 决策：建立三层质量保障机制
+  - 决策：建立四层质量保障机制
   - 理由：减少返工、提高代码质量、知识积累
   - 影响：开发流程优化、文档持久化
+
+- **[ADR-002: 真实命令绑定与证据链管理](./decisions/ADR-002-command-binding-principle.md)** ⭐ NEW
+  - 背景：学习 Harness Lab 框架的最佳实践
+  - 决策：使用 Makefile 进行真实命令绑定
+  - 原则：命令显式绑定、证据链管理、环境清单绑定
+  - 影响：AI Agent 可自动执行、复现性强、易于 CI/CD 集成
+
+- **[ADR-003: 前端视觉设计语言一次性确认](./decisions/ADR-003-frontend-design-confirmation.md)** ⭐ NEW
+  - 背景：Day 5 前端开发进行了 10+ 次设计调整
+  - 决策：在 tech-design 阶段前置确认 4 大设计问题
+  - ROI：预期 Day 6+ 时间节省 50%（4:1 收益）
+  - 影响：提高开发效率、改善用户满意度
+
+### 经验知识库 ⭐ NEW
+- **[经验库索引](./experiences/README.md)**
+  - 可复用的知识文件，按时间和主题组织
+  - 每个文件包含：问题场景、根本原因、解决方案、验证方式
+
+- **[前端视觉设计确认经验](./experiences/2026-03-25-frontend-visual-design-confirmation.md)**
+  - Day 5 前端页面从暗色改为亮色，进行 10+ 次迭代的根本原因分析
+  - 解决方案：在 tech-design 阶段一次性确认设计语言
+
+- **[质量保障四层机制](./experiences/2026-03-26-quality-assurance-four-layers.md)**
+  - 从三层升级到四层的演进过程
+  - Code Review 必须先于 Testing 的原因分析
+  - 每层的职责分工和前置检查
+
+- **[文档分类规范和重组实践](./experiences/2026-03-26-documentation-reorganization.md)**
+  - Day 2 文档混乱问题的根本原因分析
+  - 七类文档分类体系的设计原则和实施方式
 
 ### 报告和分析
 - **[代码审查报告 - Day 1-2](./reports/code-review-day1-2.md)**
@@ -197,6 +235,14 @@ docs/
 
 **架构决策**
 → [ADR-001: 质量保障工作流](./decisions/ADR-001-quality-assurance-workflow.md)
+→ [ADR-002: 真实命令绑定](./decisions/ADR-002-command-binding-principle.md)
+→ [ADR-003: 前端设计确认](./decisions/ADR-003-frontend-design-confirmation.md)
+
+**可复用经验** ⭐ NEW
+→ [经验库索引](./experiences/README.md)
+→ [前端设计确认](./experiences/2026-03-25-frontend-visual-design-confirmation.md)
+→ [质量保障四层机制](./experiences/2026-03-26-quality-assurance-four-layers.md)
+→ [文档分类规范](./experiences/2026-03-26-documentation-reorganization.md)
 
 ---
 
@@ -209,6 +255,11 @@ docs/
 | API 设计规范 | ✅ 已完成 | 2026-03-23 |
 | 质量保障流程 | ✅ 已完成 | 2026-03-24 |
 | ADR-001 质量保障工作流 | ✅ 已完成 | 2026-03-24 |
+| ADR-002 真实命令绑定原则 | ✅ 已完成 | 2026-03-26 |
+| ADR-003 前端设计确认流程 | ✅ 已完成 | 2026-03-26 |
+| 前端视觉设计确认经验 | ✅ 已完成 | 2026-03-25 |
+| 质量保障四层机制 | ✅ 已完成 | 2026-03-26 |
+| 文档分类规范和重组实践 | ✅ 已完成 | 2026-03-26 |
 | 开发计划 | ✅ 已完成 | 2026-03-24 |
 | 经验总结 | ✅ 持续更新 | 2026-03-24 |
 | 代码审查报告 Day 1-2 | ✅ 已完成 | 2026-03-24 |
@@ -300,4 +351,4 @@ docs/
 
 ---
 
-**最后更新**：2026-03-24
+**最后更新**：2026-03-26
