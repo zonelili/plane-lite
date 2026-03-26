@@ -20,9 +20,10 @@ plane-lite/
 ├── docs/                  # 项目文档
 ├── tests/                 # 集成测试脚本
 ├── deployments/           # Docker 部署配置(待实现)
-├── .claude/               # Claude AI 工作目录(plans, state)
+├── .claude/               # Claude AI 工作目录(plans, state, skills, progress)
 ├── .harness/              # Harness 工程配置
 ├── .git/                  # Git 版本控制
+├── Makefile               # 统一命令接口（lint, test, build, verify）
 ├── .gitignore             # Git 忽略规则
 └── CLAUDE.md              # 项目地图(给 AI Agent 看)
 ```
@@ -426,14 +427,34 @@ docs/
 ### 核心文档入口
 - **项目概述**: `/docs/requirements/01-project-overview.md` - 了解项目背景、功能特性
 - **开发计划**: `/docs/development-plan.md` - Day 1-7 开发任务
-- **质量保障**: `/docs/workflows/quality-assurance.md` - 三层质量机制
+- **质量保障**: `/docs/workflows/quality-assurance.md` - 四层质量机制
 - **数据库设计**: `/docs/architecture/database-design.md` - 表结构和 ER 图
 - **API 规范**: `/docs/conventions/api.md` - RESTful API 接口文档
+- **报告规范**: `/docs/conventions/reporting.md` - Code Review / QA / Ship 报告格式
+
+### 工程化工具和约定
+- **Skills 导航**: `/.claude/skills/README.md` - implement-day / tech-design 等 skills 索引
+- **进度记录**: `/.claude/progress.txt` - 跨会话上下文和待办事项
+- **经验库**: `/docs/experiences/` - 可复用的经验文档
+- **命令绑定**: `Makefile` - lint / test / build / verify 统一接口
 
 ### 环境配置
 - **后端配置**: `/backend/src/main/resources/application-dev.yml`
 - **数据库脚本**: `/backend/src/main/resources/db/migration/V1__init.sql`
 - **Harness 检查清单**: `/.harness/checklist.md`
+
+### 快速命令
+```bash
+# 查看所有可用命令
+make help
+
+# 完整验证（后端 + 前端）
+make verify
+
+# 分项验证
+make backend-verify    # 后端：编译 + 测试 + 检查
+make frontend-verify   # 前端：lint + 测试 + 构建
+```
 
 ---
 
