@@ -147,7 +147,7 @@ backend/
 
 ## 📂 /frontend/ - Vue 3 前端应用
 
-**状态**: ✅ Day 5 已完成（用户认证功能）
+**状态**: ✅ Day 6 已完成（项目和问题管理功能）
 
 ### 核心文件
 
@@ -163,7 +163,10 @@ frontend/
 ├── src/
 │   ├── api/                         # API 调用层
 │   │   ├── request.ts               # Axios 实例 + 拦截器配置
-│   │   └── user.api.ts              # 用户 API（register, login, me）
+│   │   ├── user.api.ts              # 用户 API（register, login, me）
+│   │   ├── project.api.ts           # 项目 API (Day 6)
+│   │   ├── issue.api.ts             # 问题 API (Day 6)
+│   │   └── workspace.api.ts         # 工作区 API (Day 6)
 │   │
 │   ├── assets/                      # 静态资源
 │   │   └── styles/
@@ -174,11 +177,16 @@ frontend/
 │   │   └── index.ts                 # 路由实例 + 路由守卫
 │   │
 │   ├── stores/                      # Pinia Store
-│   │   └── user.ts                  # 用户状态管理
+│   │   ├── user.ts                  # 用户状态管理
+│   │   ├── workspace.ts             # 工作区状态管理 (Day 6)
+│   │   ├── project.ts               # 项目状态管理 (Day 6)
+│   │   └── issue.ts                 # 问题状态管理 (Day 6)
 │   │
 │   ├── types/                       # TypeScript 类型定义
 │   │   ├── api.ts                   # API 响应类型
-│   │   └── user.ts                  # 用户相关类型
+│   │   ├── user.ts                  # 用户相关类型
+│   │   ├── project.ts               # 项目类型 (Day 6)
+│   │   └── issue.ts                 # 问题类型 (Day 6)
 │   │
 │   ├── utils/                       # 工具函数
 │   │   └── auth.ts                  # Token 管理
@@ -187,8 +195,20 @@ frontend/
 │   │   ├── auth/
 │   │   │   ├── Login.vue            # 登录页面（✅ 已实现）
 │   │   │   └── Register.vue         # 注册页面（✅ 已实现）
-│   │   └── project/
-│   │       └── ProjectList.vue      # 项目列表（Day 6 实现）
+│   │   ├── project/
+│   │   │   ├── ProjectList.vue      # 项目列表 (✅ Day 6)
+│   │   │   └── ProjectDetail.vue    # 项目详情 (✅ Day 6)
+│   │   └── issue/
+│   │       ├── IssueList.vue        # 问题列表 (✅ Day 6)
+│   │       └── IssueDetail.vue      # 问题详情 (✅ Day 6)
+│   │
+│   ├── components/                  # 组件库
+│   │   ├── layout/
+│   │   │   ├── AppLayout.vue        # 主布局 (✅ Day 6)
+│   │   │   ├── AppSidebar.vue       # 项目侧边栏 (✅ Day 6)
+│   │   │   └── AppHeader.vue        # 顶部导航 (✅ Day 6)
+│   │   └── issue/
+│   │       └── IssueForm.vue        # 问题表单 (✅ Day 6)
 │   │
 │   ├── App.vue                      # 根组件
 │   └── main.ts                      # 应用入口
@@ -402,10 +422,10 @@ docs/
 
 ## 📊 项目状态
 
-- **当前版本**: Day 5 已完成
+- **当前版本**: Day 6 已完成
 - **当前阶段**: 前端开发(Phase 2)
-- **下一步**: Day 6 - 项目和问题管理页面
-- **最后更新**: 2026-03-24
+- **下一步**: Day 7 - 看板视图、评论功能、部署
+- **最后更新**: 2026-03-30
 
 ### 已完成工作
 - ✅ Day 1: 后端项目骨架 + 用户认证模块
@@ -413,12 +433,13 @@ docs/
 - ✅ Day 3: 问题管理模块
 - ✅ Day 4: 评论模块 + 后端完善
 - ✅ Day 5: 前端项目搭建 + 用户认证页面
+- ✅ Day 6: 项目和问题管理页面（ProjectList, ProjectDetail, IssueList, IssueDetail, IssueForm）
 - ✅ 建立质量保障四层机制（Plan → Implementation → Code Review → Testing）
 
 ### 当前问题
 - ⚠️ JWT Token 安全性(使用 localStorage,建议改为 HttpOnly Cookie)
-- ⚠️ vue-tsc 类型检查工具版本不兼容（需升级到 2.x）
-- ⚠️ Element Plus 全量引入导致打包体积大 (1.36 MB)
+- ⚠️ 数据持久化缺失（需添加 localStorage 缓存）
+- ⚠️ 看板视图未实现（Day 7 任务）
 
 ---
 
