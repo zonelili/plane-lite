@@ -18,12 +18,20 @@
 
       <div class="project-issues">
         <h3>Issues</h3>
-        <RouterLink
-          :to="`/projects/${projectStore.currentProject.id}/issues`"
-          class="view-issues-btn"
-        >
-          View all issues →
-        </RouterLink>
+        <div class="issue-links">
+          <RouterLink
+            :to="`/projects/${projectStore.currentProject.id}/issues`"
+            class="view-link"
+          >
+            View List →
+          </RouterLink>
+          <RouterLink
+            :to="`/projects/${projectStore.currentProject.id}/board`"
+            class="view-link"
+          >
+            View Board →
+          </RouterLink>
+        </div>
       </div>
     </div>
 
@@ -134,16 +142,31 @@ onMounted(async () => {
         color: var(--ink, #1C1410);
       }
 
-      .view-issues-btn {
+      .issue-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .view-link {
         display: inline-block;
+        padding: 10px 20px;
+        background-color: rgba(212, 135, 10, 0.06);
+        border: 2.5px solid var(--amber, #D4870A);
+        border-radius: 3px;
         color: var(--amber, #D4870A);
         text-decoration: none;
         font-family: 'JetBrains Mono', monospace;
-        font-size: 14px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
         transition: all 0.2s;
 
         &:hover {
-          color: var(--ink, #1C1410);
+          background-color: #C07809;
+          border-color: #C07809;
+          color: white;
+          box-shadow: 0 4px 20px rgba(212, 135, 10, 0.35);
+          transform: translateY(-1px);
         }
       }
     }

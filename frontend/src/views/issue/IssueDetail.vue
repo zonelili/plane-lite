@@ -33,6 +33,19 @@
         </div>
       </div>
 
+      <!-- Comments Section -->
+      <div class="comments-section">
+        <CommentList
+          :comments="commentStore.comments"
+          :loading="commentStore.loading"
+          @delete="handleCommentDelete"
+        />
+        <CommentForm
+          :loading="commentStore.loading"
+          @submit="handleCommentSubmit"
+        />
+      </div>
+
       <!-- Edit Form Modal -->
       <div v-if="showEditForm" class="modal-overlay" @click="showEditForm = false">
         <div class="modal" @click.stop>
@@ -53,32 +66,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useIssueStore } from '@/stores/issue'
+import { useCommentStore } from '@/stores/comment'
 import { IssueStatus, IssuePriority } from '@/types/issue'
 import type { CreateIssueForm } from '@/types/issue'
 import IssueForm from '@/components/issue/IssueForm.vue'
+import CommentList from '@/components/comment/CommentList.vue'
+import CommentForm from '@/components/comment/CommentForm.vue'
 
 const route = useRoute()
 const router = useRouter()
 const issueStore = useIssueStore()
+const commentStore = useCommentStore()
 
 const currentProjectId = computed(() => Number(route.params.id))
 const issueId = computed(() => Number(route.params.issueId))
 const showEditForm = ref(false)
 const editFormData = reactive<Partial<CreateIssueForm>>({})
 
-onMounted(async () => {
-  if (issueId.value) {
+// Watch for issueId changes to reload comments
+watch(issueId, async (newId) => {
+  if (newId) {
     try {
-      await issueStore.getIssue(issueId.value)
+      await issueStore.getIssue(newId)
+      await commentStore.fetchComments(newId)
     } catch (err) {
       ElMessage.error('Failed to load issue')
     }
   }
-})
+}, { immediate: true })
 
 function formatStatus(status: IssueStatus) {
   const map = {
@@ -127,6 +146,28 @@ async function deleteIssue() {
     }
   } catch (err) {
     // User cancelled
+  }
+}
+
+async function handleCommentSubmit(content: string) {
+  if (!issueId.value) return
+  try {
+    await commentStore.createComment({
+      issueId: issueId.value,
+      content
+    })
+    ElMessage.success('Comment added')
+  } catch (err) {
+    ElMessage.error((err as Error).message || 'Failed to add comment')
+  }
+}
+
+async function handleCommentDelete(id: number) {
+  try {
+    await commentStore.deleteComment(id)
+    ElMessage.success('Comment deleted')
+  } catch (err) {
+    ElMessage.error((err as Error).message || 'Failed to delete comment')
   }
 }
 </script>
@@ -299,6 +340,10 @@ async function deleteIssue() {
           }
         }
       }
+    }
+
+    .comments-section {
+      margin-top: 24px;
     }
   }
 }

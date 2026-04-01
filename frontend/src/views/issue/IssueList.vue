@@ -1,7 +1,17 @@
 <template>
   <div class="issue-list-page">
     <div class="page-header">
-      <h1>Issues</h1>
+      <div class="header-left">
+        <h1>Issues</h1>
+        <div class="view-toggle">
+          <RouterLink :to="`/projects/${currentProjectId}/issues`" class="toggle-btn active">
+            List
+          </RouterLink>
+          <RouterLink :to="`/projects/${currentProjectId}/board`" class="toggle-btn">
+            Board
+          </RouterLink>
+        </div>
+      </div>
       <button class="btn-primary" @click="showCreateForm = true">+ New Issue</button>
     </div>
 
@@ -83,7 +93,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useIssueStore } from '@/stores/issue'
 import { IssueStatus, IssuePriority } from '@/types/issue'
@@ -207,11 +217,45 @@ async function deleteIssue(id: number) {
     align-items: center;
     margin-bottom: 20px;
 
-    h1 {
-      margin: 0;
-      font-family: 'DM Serif Display', serif;
-      font-size: 28px;
-      color: var(--ink, #1C1410);
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      h1 {
+        margin: 0;
+        font-family: 'DM Serif Display', serif;
+        font-size: 28px;
+        color: var(--ink, #1C1410);
+      }
+
+      .view-toggle {
+        display: flex;
+        border: 1px solid var(--border-light, #e4e7ed);
+        border-radius: 4px;
+        overflow: hidden;
+
+        .toggle-btn {
+          padding: 6px 16px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12px;
+          color: var(--text-secondary, #999);
+          text-decoration: none;
+          background-color: white;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover {
+            background-color: var(--field-bg, #EDE8E0);
+          }
+
+          &.active {
+            background-color: var(--amber, #D4870A);
+            color: white;
+          }
+        }
+      }
     }
 
     .btn-primary {
